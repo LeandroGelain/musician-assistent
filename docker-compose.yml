@@ -1,0 +1,56 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: musician-assistant-postgres
+    environment:
+      POSTGRES_DB: musician_assistant
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d musician_assistant"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    container_name: musician-assistant-backend
+    environment:
+      APP_NAME: Musician Assistant API
+      SECRET_KEY: trocar-esta-chave-em-producao
+      ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/musician_assistant
+      CORS_ORIGINS: http://localhost:5173,http://frontend:5173
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: musician-assistant-frontend
+    environment:
+      VITE_API_URL: http://localhost:8000
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "200"
+    depends_on:
+      backend:
+        condition: service_started
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+
+volumes:
+  postgres_data:
