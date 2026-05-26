@@ -22,7 +22,7 @@ export function DashboardPage() {
         </button>
       </header>
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section className="grid gap-4 md:grid-cols-4">
         <Link className="card p-6 transition hover:-translate-y-1" to="/metronomo">
           <h2 className="mb-2 text-2xl">Metronomo</h2>
           <p className="text-slate-600">Configure BPM e compasso para estudo diario.</p>
@@ -34,6 +34,10 @@ export function DashboardPage() {
         <Link className="card p-6 transition hover:-translate-y-1" to="/repertorio">
           <h2 className="mb-2 text-2xl">Repertorio</h2>
           <p className="text-slate-600">Gerencie musicas e observacoes importantes.</p>
+        </Link>
+        <Link className="card p-6 transition hover:-translate-y-1" to="/partituras">
+          <h2 className="mb-2 text-2xl">Partituras</h2>
+          <p className="text-slate-600">Importe PDF, converta notas em frequencias e visualize em pauta.</p>
         </Link>
       </section>
     </main>

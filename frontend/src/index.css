@@ -50,3 +50,13 @@ h3 {
 .btn-primary:hover {
   background: #1f4a8f;
 }
+
+.at-practice-target {
+  filter: drop-shadow(0 0 0.35rem rgba(220, 38, 38, 0.45));
+}
+
+.at-practice-target,
+.at-practice-target * {
+  fill: #dc2626 !important;
+  stroke: #dc2626 !important;
+}

@@ -5,6 +5,7 @@ from app.api import (
 	audio_ws,
 	auth_routes,
 	metronomo_routes,
+	partitura_routes,
 	repertorio_routes,
 )
 
@@ -14,3 +15,4 @@ api_router.include_router(metronomo_routes.router)
 api_router.include_router(afinador_routes.router)
 api_router.include_router(repertorio_routes.router)
 api_router.include_router(audio_ws.router)
+api_router.include_router(partitura_routes.router)

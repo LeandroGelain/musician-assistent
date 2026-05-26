@@ -1,6 +1,6 @@
 from collections.abc import Generator
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect, text
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.core.config import get_settings
@@ -55,4 +55,28 @@ def get_db() -> Generator[Session, None, None]:
 
 
 def init_db() -> None:
-    Base.metadata.create_all(bind=get_engine())
+    db_engine = get_engine()
+    Base.metadata.create_all(bind=db_engine)
+    _ensure_partitura_measure_marks_columns(db_engine)
+
+
+def _ensure_partitura_measure_marks_columns(db_engine) -> None:
+    inspector = inspect(db_engine)
+    if 'partitura_measure_marks' not in inspector.get_table_names():
+        return
+
+    existing_columns = {column['name'] for column in inspector.get_columns('partitura_measure_marks')}
+    statements: list[str] = []
+
+    if 'key_fifths' not in existing_columns:
+        statements.append('ALTER TABLE partitura_measure_marks ADD COLUMN key_fifths INTEGER NOT NULL DEFAULT 0')
+
+    if 'clef_octave_change' not in existing_columns:
+        statements.append('ALTER TABLE partitura_measure_marks ADD COLUMN clef_octave_change INTEGER NOT NULL DEFAULT 0')
+
+    if not statements:
+        return
+
+    with db_engine.begin() as connection:
+        for stmt in statements:
+            connection.execute(text(stmt))

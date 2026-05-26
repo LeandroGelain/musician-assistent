@@ -29,3 +29,8 @@ class User(Base):
         uselist=False,
         cascade='all, delete-orphan',
     )
+    partituras = relationship(
+        'Partitura',
+        back_populates='owner',
+        cascade='all, delete-orphan',
+    )
