@@ -31,9 +31,13 @@ export function DashboardPage() {
           <h2 className="mb-2 text-2xl">Afinador</h2>
           <p className="text-slate-600">Afine seu instrumento com deteccao de nota em tempo real.</p>
         </Link>
-        <Link className="card p-6 transition hover:-translate-y-1" to="/repertorio">
-          <h2 className="mb-2 text-2xl">Repertorio</h2>
-          <p className="text-slate-600">Gerencie musicas e observacoes importantes.</p>
+        <Link className="card p-6 transition hover:-translate-y-1" to="/partituras">
+          <h2 className="mb-2 text-2xl">Partituras</h2>
+          <p className="text-slate-600">Importe PDF, converta notas em frequencias e visualize em pauta.</p>
+        </Link>
+        <Link className="card p-6 transition hover:-translate-y-1" to="/exercicios">
+          <h2 className="mb-2 text-2xl">Exercicios</h2>
+          <p className="text-slate-600">Gere exercicios musicais aleatorios e pratique com o microfone.</p>
         </Link>
         <Link className="card p-6 transition hover:-translate-y-1" to="/partituras">
           <h2 className="mb-2 text-2xl">Partituras</h2>

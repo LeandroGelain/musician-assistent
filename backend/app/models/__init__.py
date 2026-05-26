@@ -1,4 +1,5 @@
 from app.models.afinador_settings import AfinadorSettings
+from app.models.exercicio import Exercicio
 from app.models.metronomo_settings import MetronomoSettings
 from app.models.partitura import Partitura, PartituraEvent, PartituraMeasureMark
 from app.models.repertorio_item import RepertorioItem
@@ -12,4 +13,5 @@ __all__ = [
 	'Partitura',
 	'PartituraEvent',
 	'PartituraMeasureMark',
+	'Exercicio',
 ]

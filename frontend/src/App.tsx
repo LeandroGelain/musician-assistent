@@ -2,6 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './features/auth/ProtectedRoute'
 import { AfinadorPage } from './pages/AfinadorPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { ExercicioViewerPage } from './pages/ExercicioViewerPage'
+import { ExerciciosPage } from './pages/ExerciciosPage'
 import { LoginPage } from './pages/LoginPage'
 import { MetronomoPage } from './pages/MetronomoPage'
 import { PartituraViewerPage } from './pages/PartituraViewerPage'
@@ -68,6 +70,22 @@ function App() {
         element={
           <ProtectedRoute>
             <PartituraViewerV2Page />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/exercicios"
+        element={
+          <ProtectedRoute>
+            <ExerciciosPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/exercicios/:id"
+        element={
+          <ProtectedRoute>
+            <ExercicioViewerPage />
           </ProtectedRoute>
         }
       />
