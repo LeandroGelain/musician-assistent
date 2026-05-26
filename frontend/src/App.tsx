@@ -2,8 +2,13 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './features/auth/ProtectedRoute'
 import { AfinadorPage } from './pages/AfinadorPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { ExercicioViewerPage } from './pages/ExercicioViewerPage'
+import { ExerciciosPage } from './pages/ExerciciosPage'
 import { LoginPage } from './pages/LoginPage'
 import { MetronomoPage } from './pages/MetronomoPage'
+import { PartituraViewerPage } from './pages/PartituraViewerPage'
+import { PartituraViewerV2Page } from './pages/PartituraViewerV2Page'
+import { PartiturasPage } from './pages/PartiturasPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { RepertorioPage } from './pages/RepertorioPage'
 
@@ -41,6 +46,46 @@ function App() {
         element={
           <ProtectedRoute>
             <RepertorioPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/partituras"
+        element={
+          <ProtectedRoute>
+            <PartiturasPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/partituras/:id"
+        element={
+          <ProtectedRoute>
+            <PartituraViewerPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/partituras/:id/v2"
+        element={
+          <ProtectedRoute>
+            <PartituraViewerV2Page />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/exercicios"
+        element={
+          <ProtectedRoute>
+            <ExerciciosPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/exercicios/:id"
+        element={
+          <ProtectedRoute>
+            <ExercicioViewerPage />
           </ProtectedRoute>
         }
       />
